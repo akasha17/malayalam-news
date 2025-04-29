@@ -33,9 +33,11 @@ def view_all_latest_news(request):
 def news_detail(request, id):
     item = get_object_or_404(News, id=id)
     others = News.objects.exclude(id=id).order_by('-created_at')[:5]
+    advertisement = Advertisement.objects.all()
     return render(request, 'news_detail.html', {
         'news': item,
         'latest_news': others,
+        'advertisement': advertisement,
     })
 
 
