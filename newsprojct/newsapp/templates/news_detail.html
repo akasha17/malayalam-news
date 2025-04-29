@@ -43,7 +43,16 @@
         </div>
     </div>
 </nav>
-
+{% if advertisement %}
+<div class="ad-banner d-inline-block">
+  {% for ad in advertisement %}
+  <a href="{{ ad.link }}" target="_blank">
+    <img src="{{ ad.image.url }}" alt="Advertisement" class="img-fluid" style="max-height: 50px;">
+  </a>
+  {% endfor %}
+</div>
+{% endif %}
+</div>
 <div class="container mt-4">
     <div class="row">
         <!-- Main News Section -->
