@@ -1,0 +1,113 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+}
+.navbar-nav .nav-link {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #000; /* Turns dark on hover */
+}
+
+
+
+.container {
+    max-width: 1200px;
+}
+
+/* News Detail Section */
+.news-detail {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+}
+
+.news-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #343a40;
+}
+
+.news-image img {
+    border-radius: 8px;
+}
+
+.news-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #495057;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.latest-news-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.latest-news-item {
+    margin-bottom: 10px;
+}
+
+.latest-news-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.latest-news-link:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 20px 0;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.news-detail {
+background-color: white;
+padding: 25px;
+border-radius: 10px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+width: 100%;
+}
+
+/* Reduce padding on small devices */
+@media (max-width: 576px) {
+.news-detail {
+padding: 15px;
+}
+
+.news-title {
+font-size: 1.6rem;
+}
+
+.news-content p {
+font-size: 1rem;
+}
+}

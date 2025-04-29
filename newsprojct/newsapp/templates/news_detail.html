@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Malayalam News</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-uppercase" href="/" style="letter-spacing: 1px; font-family: 'Roboto', sans-serif;">
+            MALAYALAM<span style="color: #ffc107;">NEWS</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase text-secondary fw-light" href="/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="newsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        CATEGORY
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="newsDropdown">
+                        <li><a class="dropdown-item" href="{% url 'view_all_latest_news' %}">Latest News</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view_all_headline_news' %}">Headline News</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase text-secondary fw-light" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Main News Section -->
+        <div class="col-lg-8 col-12 mb-4">
+            <div class="news-detail">
+                <h1 class="news-title">{{ news.title }}</h1>
+                <p class="text-muted">Published on {{ news.created_at|date:"F d, Y" }}</p>
+                <img src="{{ news.image.url }}" alt="{{ news.title }}" class="img-fluid rounded mb-3">
+                <div class="news-content">
+                    <p>{{ news.content }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4 col-12">
+            <div class="sidebar">
+                <h4>Latest News</h4>
+                {% for item in latest_news %}
+                <div class="latest-news-item mb-3">
+                    <a href="{% url 'news_detail' item.id %}" class="d-block fw-medium text-decoration-none text-primary">
+                        {{ item.title|truncatechars:60 }}
+                    </a>
+                    <p class="text-muted small">{{ item.created_at|date:"M d, Y" }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand navbar-dark bg-dark py-3">
+    <div class="container">
+        <div class="row w-100">
+            <div class="col-md-6">
+                <h5 class="text-white mb-3">Follow Us</h5>
+                <div class="d-flex">
+                    <a class="btn btn-outline-light btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0">
+                <h5 class="text-white mb-3">Contact Us</h5>
+                <div class="d-flex flex-column">
+                    <a href="mailto:contact@example.com" class="text-white mb-1"><i class="fa fa-envelope mr-2"></i>contact@example.com</a>
+                    <a href="tel:+1234567890" class="text-white"><i class="fa fa-phone mr-2"></i>+123 456 7890</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Scripts (only necessary ones) -->
+<script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function scrollLeft() {
+    document.getElementById("headlineScroll").scrollBy({ left: -300, behavior: 'smooth' });
+}
+function scrollRight() {
+    document.getElementById("headlineScroll").scrollBy({ left: 300, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>

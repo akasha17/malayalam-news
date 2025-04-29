@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - Malayalam News</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="{% static 'css/admin_style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="#">Admin Panel</a>
+
+    <!-- Hamburger for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Desktop menu -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="#" class="nav-link active">Dashboard</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="newsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Add News
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="newsDropdown">
+            <li><a class="dropdown-item" href="{% url 'add_latest_news' %}">Add Latest News</a></li>
+            <li><a class="dropdown-item" href="{% url 'add_headline_news' %}">Add Headline News</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'manage_ads' %}" class="nav-link">Manage Ads</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'view_all_news' %}" class="nav-link">View All News</a>
+        </li>
+        <form action="{% url 'admin_logout' %}" method="POST" class="d-flex ms-3">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+        </form>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Offcanvas Sidebar (only visible on mobile) -->
+<div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasMenu">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title fw-bold">Admin Panel</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="#" class="nav-link text-white">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'add_latest_news' %}" class="nav-link text-white">Add Latest News</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'add_headline_news' %}" class="nav-link text-white">Add Headline News</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-white">Manage Ads</a>
+      </li>
+      
+      <li class="nav-item">
+        <a href="{% url 'view_all_news' %}" class="nav-link text-white">View All News</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="container my-4">
+  <h2 class="fw-bold mb-4">Dashboard Overview</h2>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card shadow-sm p-4 text-center">
+        <i class="fas fa-newspaper fa-2x text-primary mb-2"></i>
+        <h5>{{ total_news_count }}</h5>
+        <p class="text-muted">Total News</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm p-4 text-center">
+        <i class="fas fa-bullhorn fa-2x text-success mb-2"></i>
+        <h5>{{ total_ads_count }}</h5>
+        <p class="text-muted">Advertisements</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm p-4 text-center">
+        <i class="fas fa-newspaper fa-2x text-primary mb-2"></i>
+        <h5>{{ total_latest_news_count }}</h5>
+        <p class="text-muted">Latest News</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm p-4 text-center">
+        <i class="fas fa-star fa-2x text-warning mb-2"></i>
+        <h5>{{ total_headline_news_count }}</h5>
+        <p class="text-muted">Headline News</p>
+      </div>
+    </div>
+    
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

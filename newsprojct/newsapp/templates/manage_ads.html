@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Advertisements</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container my-5">
+  <h2 class="mb-4">Manage Advertisements</h2>
+
+  <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary btn-sm mb-3">
+    <i class="fas fa-arrow-left"></i> Back to Dashboard
+  </a>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="card p-4 mb-4">
+    <h5 class="mb-3">Add New Advertisement</h5>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="image" class="form-label">Advertisement Image</label>
+        <input type="file" name="image" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="link" class="form-label">Advertisement Link</label>
+        <input type="url" name="link" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Advertisement</button>
+    </form>
+  </div>
+
+  <h5>Existing Advertisements</h5>
+  <div class="row">
+    {% for ad in ads %}
+    <div class="col-md-3 mb-4">
+      <div class="card">
+        <img src="{{ ad.image.url }}" class="card-img-top" alt="Advertisement">
+        <div class="card-body text-center">
+          <a href="{{ ad.link }}" target="_blank" class="btn btn-sm btn-outline-primary mb-2">Visit Link</a>
+          
+          <form method="POST" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="delete_ad_id" value="{{ ad.id }}">
+            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+    {% empty %}
+      <p>No advertisements added yet.</p>
+    {% endfor %}
+  </div>
+  
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
